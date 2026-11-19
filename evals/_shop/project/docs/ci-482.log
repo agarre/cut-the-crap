@@ -1,0 +1,14 @@
+Run npm test
+
+> orders-api@1.8.0 test
+> node --test
+
+✔ an order without a coupon pays the products plus shipping (1.31ms)
+﹣ BEMVINDO takes 10% off the products only (0.12ms) # SKIP
+ℹ tests 2
+ℹ pass 1
+ℹ fail 0
+ℹ skipped 1
+ℹ duration_ms 58.4
+
+Job succeeded

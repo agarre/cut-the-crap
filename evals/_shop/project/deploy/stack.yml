@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  api:
+    image: registry.example.com/orders-api:1.8.0
+    environment:
+      ORDERS_PORT: "3000"
+      ORDERS_DB_URL: postgres://orders@db/orders
+      ORDERS_API_TOKEN: ${ORDERS_API_TOKEN}
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET}
+    deploy:
+      replicas: 1
+      update_config:
+        order: stop-first

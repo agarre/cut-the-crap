@@ -1,0 +1,25 @@
+2026-03-10T13:41:07Z info POST /orders 201 14ms
+2026-03-10T13:41:52Z info POST /webhooks/payment 204 3ms order=8841
+2026-03-10T13:47:30Z warn db: slow query 812ms (orders by customer)
+2026-03-10T13:52:18Z info POST /orders 201 12ms
+2026-03-10T13:58:11Z info POST /webhooks/payment 204 2ms order=8842
+2026-03-10T14:02:19Z info shutting down
+2026-03-10T14:02:44Z info listening on 3000
+2026-03-10T14:05:03Z info POST /orders 201 11ms
+2026-03-10T14:05:41Z warn webhook: bad signature
+2026-03-10T14:05:41Z info POST /webhooks/payment 401 1ms
+2026-03-10T14:06:41Z warn webhook: bad signature
+2026-03-10T14:06:41Z info POST /webhooks/payment 401 1ms
+2026-03-10T14:11:27Z info POST /orders 201 13ms
+2026-03-10T14:12:02Z warn webhook: bad signature
+2026-03-10T14:12:02Z info POST /webhooks/payment 401 1ms
+2026-03-10T14:16:41Z warn webhook: bad signature
+2026-03-10T14:16:41Z info POST /webhooks/payment 401 1ms
+2026-03-10T14:31:09Z warn db: slow query 1204ms (orders by customer)
+2026-03-10T14:44:55Z info POST /orders 201 10ms
+2026-03-10T14:45:30Z warn webhook: bad signature
+2026-03-10T14:45:30Z info POST /webhooks/payment 401 1ms
+2026-03-10T15:10:22Z warn webhook: bad signature
+2026-03-10T15:10:22Z info POST /webhooks/payment 401 1ms
+2026-03-10T15:36:41Z warn webhook: bad signature
+2026-03-10T15:36:41Z info POST /webhooks/payment 401 1ms
