@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  hooks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s tests -v
+
+  claude-plugin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install -g @anthropic-ai/claude-code
+      - name: Plugin validates, installs, and is enabled
+        run: |
+          export CLAUDE_CONFIG_DIR="$RUNNER_TEMP/claude"
+          mkdir -p "$CLAUDE_CONFIG_DIR"
+          claude plugin validate .
+          claude plugin marketplace add "$GITHUB_WORKSPACE"
+          claude plugin install cut-the-crap@cut-the-crap
+          claude plugin list | tee plugin-list.txt
+          grep -qw enabled plugin-list.txt

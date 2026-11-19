@@ -1,9 +1,9 @@
 {
-  "name": "i-have-adhd",
-  "version": "0.4.1",
-  "description": "Shape Claude Code output for an ADHD reader: lead with the next action, number steps, suppress tangents, restate state, make wins visible.",
+  "name": "cut-the-crap",
+  "version": "0.3.0",
+  "description": "Output style for short, plain, honest answers. Type \"crap\" to get the last response rewritten.",
   "author": {
-    "name": "Ayoub G.",
-    "url": "https://github.com/ayghri"
+    "name": "Hugo Breda",
+    "url": "https://github.com/agarre"
   }
 }

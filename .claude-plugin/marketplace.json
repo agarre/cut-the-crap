@@ -1,14 +1,14 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
-  "name": "i-have-adhd",
-  "description": "Shape Claude Code output for an ADHD reader. Action-first, numbered steps, no tangents.",
+  "name": "cut-the-crap",
+  "description": "Short, plain, honest answers from coding agents.",
   "owner": {
-    "name": "Ayoub G."
+    "name": "Hugo Breda"
   },
   "plugins": [
     {
-      "name": "i-have-adhd",
-      "description": "Action-first, ADHD-friendly output shaping for Claude Code.",
+      "name": "cut-the-crap",
+      "description": "Output style for short, plain, honest answers. Type \"crap\" to get the last response rewritten.",
       "source": "./",
       "category": "productivity"
     }

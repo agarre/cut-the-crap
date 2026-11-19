@@ -1,107 +1,40 @@
-<p align="center">
-  <img src="./logo.png" alt="i-have-adhd" width="140" />
-</p>
-<p align="center">
-  <strong align="center">ADHD-friendly outputs. No ADHD diagnosis needed!</strong>
-</p>
-<p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/ayghri/i-have-adhd?style=flat" alt="License"></a>
-</p>
+# cut-the-crap
 
-<p align="center">
-  <strong title="English" aria-label="English">🇬🇧</strong> ·
-  <a href=".github/readme/README.zh-CN.md" title="简体中文" aria-label="简体中文">🇨🇳</a> ·
-  <a href=".github/readme/README.es.md" title="Español" aria-label="Español">🇪🇸</a> ·
-  <a href=".github/readme/README.pt-BR.md" title="Português (Brasil)" aria-label="Português (Brasil)">🇧🇷</a> ·
-  <a href=".github/readme/README.ja.md" title="日本語" aria-label="日本語">🇯🇵</a> ·
-  <a href=".github/readme/README.vi.md" title="Tiếng Việt" aria-label="Tiếng Việt">🇻🇳</a> ·
-  <a href=".github/readme/README.ko.md" title="한국어" aria-label="한국어">🇰🇷</a> ·
-  <a href=".github/readme/README.fa.md" title="فارسی" aria-label="فارسی">🇮🇷</a> ·
-  <a href=".github/readme/README.th.md" title="ภาษาไทย" aria-label="ภาษาไทย">🇹🇭</a> ·
-  <a href=".github/readme/README.ar.md" title="العربية" aria-label="العربية">🇸🇦</a> ·
-  <a href=".github/readme/README.fr.md" title="Français" aria-label="Français">🇫🇷</a>
-</p>
+Makes coding agents answer short, plain and honest. It works through an output style and one hook, not through text you paste into instruction files.
 
-
-## Install
-
-Copy/paste into your CLI prompt:
-
-```text
-Install the i-have-adhd skill/plugin from https://github.com/ayghri/i-have-adhd, refer to the repo's AGENTS.md for instructions.
-```
-
-Or 🔗 [check the installation instructions](INSTALL.md).
+🇬🇧 English · [🇧🇷 Português](README.pt-BR.md)
 
 ## What it does
 
-A skill for your coding assistant that stops it from burying the answer. Action first. Steps numbered. No "Hope this helps!"
+- **An output style carries the rules** ([output-styles/cut-the-crap.md](output-styles/cut-the-crap.md), about 500 words): lead with the answer; say it straight when you are wrong or the agent disagrees; don't make things up; short, not cryptic; no bare references like `PR #482` without saying what they are; lists only when they help; no filler (status recaps, time estimates, next-step lines, "what works now" showcases); errors without drama. Claude Code turns the style on by itself while the plugin is enabled, in every project, and keeps it through compaction. Where your `CLAUDE.md`, `AGENTS.md` or another plugin asks for a different response style, these rules win.
+- **Type `crap`** as the whole prompt to get the last response rewritten. That is the only thing the hook does; nothing is added to your other prompts. Each `crap` also queues the rejected response with your prompt (`crap.jsonl` in the plugin's data directory, last 20 only).
+- **`/cut-the-crap:crap-review`** goes through that queue with you: for each rejected response it names the rule that was broken, you keep it as an eval case in `evals/` or discard it, and the queue is emptied. That is how the style learns from your real failures instead of invented ones; nothing is learned automatically.
 
-[Kacper Rutkiewicz | AI Made Simple](https://youtu.be/NEl8kPWZP_Y) has made a good breakdown of an earlier version of the skill.
-## What changes
-
-
-<table>
-<tr>
-<td width="50%">
-
-## Before
-
-> Great question! Let me think about this. Your auth flow has a few moving pieces: the middleware, the token verification, and the cookie handling. Looking at `src/auth.ts`, the `verifyToken` function (around lines 42-58) seems to be using an older `jsonwebtoken` API. One approach would be to update the package and rewrite that function. After making the change, you'd want to run the auth tests to confirm nothing breaks. By the way, you might also want to look at your dependency versions overall. Hope this helps! Let me know if you want to dig deeper.
-
-</td>
-
-<td width="50%">
-
-## After
-
-> Edit `src/auth.ts:42` to update the token validation.
->
-> 1. Open `src/auth.ts`
-> 2. Replace `verifyToken` (lines 42–58) with the snippet below
-> 3. Run `npm test -- auth.spec.ts`
->
-> Next: paste the first failing line if any test fails.
-
-</td>
-</tr>
-</table>
-
-
-## The rules
-
-10 rules. Full text in [SKILL.md](./skills/i-have-adhd/SKILL.md).
-
-1. Lead with the next action.
-2. Number multi-step tasks.
-3. End with one concrete next step.
-4. Suppress tangents.
-5. Restate state every turn.
-6. Specific time estimates (minutes, not "a bit").
-7. Make wins visible.
-8. Matter-of-fact errors.
-9. Cap lists to 5 items.
-10. No preamble. No recap. No closers.
-
-## Tune it
-
-Fork, edit `skills/i-have-adhd/SKILL.md`, then swap your copy in:
+## Install (Claude Code)
 
 ```bash
-claude plugin uninstall i-have-adhd            # drop the upstream copy first:
-claude plugin marketplace remove i-have-adhd   # fork and upstream share both names
-claude plugin marketplace add <your-username>/i-have-adhd
-claude plugin install i-have-adhd@i-have-adhd
+claude plugin marketplace add agarre/cut-the-crap
+claude plugin install cut-the-crap@cut-the-crap
 ```
 
-Restart your coding assistant, then re-invoke `/i-have-adhd`.
+Restart Claude Code. The hook needs `node` on your `PATH`. To try it for one session without installing, run `claude --plugin-dir <path-to-this-repo>`.
 
-## Credits
+Nothing else to set up. While the plugin is enabled, its style replaces the one picked in `/config`; disable the plugin to get yours back. Response-style rules in your own `CLAUDE.md` or `AGENTS.md` are no longer needed, and you can delete them to save tokens.
 
-Loosely based on *The Adult ADHD Tool Kit* by J. Russell Ramsay and Anthony L. Rostain. Adapted for how an LLM should respond, not how a human should organize their day.
+Codex, OpenCode and Antigravity come next.
 
-## License
+## Limits
 
-[MIT](LICENSE).
+- Tested on Linux.
+- Subagents do not get the style: a subagent's system prompt carries no output style (checked on Claude Code 2.1.304). Their reports come back to the main agent, which answers you in the style.
+- Claude Code runs the copy of the plugin in `~/.claude/plugins/cache/`, refreshed only when the version in `plugin.json` changes; after editing the plugin, bump the version and run `claude plugin update cut-the-crap@cut-the-crap`.
 
-Star ⭐ if it saved you one scroll past one "Great question!"
+## Development
+
+```bash
+python3 -B -m unittest discover -s tests -v
+claude plugin validate .
+claude plugin eval . --judge-model sonnet --runs 1   # six cases in evals/, scored with and without the plugin; each run is a paid session
+```
+
+The eval cases bait the rules (a question that invites praise, a task that invites an offer, a diagnosis full of IDs, a wrong premise, an "explain", a pasted error) and grade only the form of the answer, never its content: one regex for closing offers, and three LLM judges that read the style's own rules (first line is the answer; plain and honest; no filler). Graders that never fired in any run were removed. On 2026-10-20, one run per case: no plugin 0.67, plugin 0.79, with 18% fewer output tokens. The rule that failed most with the plugin on was "no filler": an extra nobody asked for at the end of an otherwise good answer. The style was then cut from about 700 to about 500 words, with that rule made explicit ("only what was asked"), and scored 0.92 on the same cases with 14% fewer output tokens than the long version. One run per case is a signal, not proof. A one-line reminder on every prompt was measured against the style alone and added nothing, so there is none.
