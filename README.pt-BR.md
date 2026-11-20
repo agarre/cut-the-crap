@@ -7,8 +7,8 @@ Faz agentes de código responderem curto, claro e honesto. Funciona por um outpu
 ## O que faz
 
 - **Um output style leva as regras** ([output-styles/cut-the-crap.md](output-styles/cut-the-crap.md), umas 500 palavras): comece pela resposta; fale direto quando você estiver errado ou o agente discordar; não invente; curto, mas não críptico; nada de referência solta como `PR #482` sem dizer o que é; lista só quando ajuda; sem enrolação (resumo do estado, estimativa de tempo, "próximo passo" no fim, vitrine do que já funciona); erros sem drama. O Claude Code liga o estilo sozinho enquanto o plugin está ativo, em todo projeto, e o mantém depois de uma compactação. Onde o seu `CLAUDE.md`, `AGENTS.md` ou outro plugin pede outro estilo de resposta, estas regras vencem.
-- **Digite só `crap`** para o agente reescrever a última resposta. É a única coisa que o hook faz; nas outras mensagens ele não acrescenta nada. Cada `crap` também enfileira a resposta reprovada junto com a sua mensagem (`crap.jsonl` no diretório de dados do plugin, só as últimas 20).
-- **`/cut-the-crap:crap-review`** percorre essa fila com você: para cada resposta reprovada o agente diz qual regra quebrou, você a mantém como caso de eval em `evals/` ou descarta, e a fila é esvaziada. É assim que o estilo aprende com as suas falhas reais em vez das inventadas; nada é aprendido sozinho.
+- **Digite `crap`** para o agente reescrever a última resposta. Diga o motivo em seguida (`crap não entendi`) e a reescrita conserta isso. É a única coisa que o hook faz; nas outras mensagens ele não acrescenta nada.
+- **`node scripts/usage.mjs`** lê as transcrições das suas sessões e mostra como saem as respostas escritas sob o estilo: mediana de palavras, parcela acima de 80 e de 200 palavras, parcela cortada em seções, por texto do estilo e por modelo. Com `--complaints` ele lista as mensagens que pediram menos texto ou mais clareza e o tamanho da resposta que cada uma reprovou. Não guarda nada.
 
 ## Instalação (Claude Code)
 

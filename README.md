@@ -7,8 +7,8 @@ Makes coding agents answer short, plain and honest. It works through an output s
 ## What it does
 
 - **An output style carries the rules** ([output-styles/cut-the-crap.md](output-styles/cut-the-crap.md), about 500 words): lead with the answer; say it straight when you are wrong or the agent disagrees; don't make things up; short, not cryptic; no bare references like `PR #482` without saying what they are; lists only when they help; no filler (status recaps, time estimates, next-step lines, "what works now" showcases); errors without drama. Claude Code turns the style on by itself while the plugin is enabled, in every project, and keeps it through compaction. Where your `CLAUDE.md`, `AGENTS.md` or another plugin asks for a different response style, these rules win.
-- **Type `crap`** as the whole prompt to get the last response rewritten. That is the only thing the hook does; nothing is added to your other prompts. Each `crap` also queues the rejected response with your prompt (`crap.jsonl` in the plugin's data directory, last 20 only).
-- **`/cut-the-crap:crap-review`** goes through that queue with you: for each rejected response it names the rule that was broken, you keep it as an eval case in `evals/` or discard it, and the queue is emptied. That is how the style learns from your real failures instead of invented ones; nothing is learned automatically.
+- **Type `crap`** to get the last response rewritten. Say why after it (`crap I did not understand`) and the rewrite fixes that. That is the only thing the hook does; nothing is added to your other prompts.
+- **`node scripts/usage.mjs`** reads your session transcripts and shows how the answers written under the style look: median words, share over 80 and over 200 words, share cut into sections, per style text and model. With `--complaints` it lists the prompts that asked for less or clearer text and the size of the answer each one rejected. It stores nothing.
 
 ## Install (Claude Code)
 
